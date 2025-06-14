@@ -17,7 +17,7 @@ const Users = () => {
   }, []);
 
   const getUsers = () => {
-      Axios.get('http://localhost:3001/api/users')
+      Axios.get(process.env.REACT_APP_API_URL + '/api/users')
       .then(response =>{
         setUsers(response.data?.response || []);
       })
@@ -34,7 +34,7 @@ const Users = () => {
       name: data.name,
     }
 
-    Axios.post('http://localhost:3001/api/createUser', payload)
+    Axios.post(process.env.REACT_APP_API_URL + '/api/createUser', payload)
         .then(() =>{
           setSubmitted(false);
           getUsers();
@@ -53,7 +53,7 @@ const Users = () => {
       name: data.name,
     }
 
-    Axios.put('http://localhost:3001/api/updateUser', payload)
+    Axios.put(process.env.REACT_APP_API_URL + '/api/updateUser', payload)
         .then(() =>{
           setSubmitted(false);
           getUsers();
@@ -65,7 +65,7 @@ const Users = () => {
   }
 
   const deleteUser = (data) => {
-    Axios.delete('http://localhost:3001/api/deleteUser',{data: data})
+    Axios.delete(process.env.REACT_APP_API_URL + '/api/deleteUser',{data: data})
       .then(() => {
         getUsers();
       })
